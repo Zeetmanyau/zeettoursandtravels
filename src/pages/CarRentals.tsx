@@ -52,7 +52,7 @@ const CarRentals = () => {
           <div className="p-6 bg-yellow-50 rounded-2xl border border-yellow-600/30 mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Note</h3>
             <p className="text-gray-600 text-sm">
-              Please note that Car prices may slightly vary as per the timings like beyond 12/10 hrs and economical situations
+              Please note that Car prices may slightly vary as per the timings like beyond 10-12 hours and economical situations
             </p>
           </div>
 
