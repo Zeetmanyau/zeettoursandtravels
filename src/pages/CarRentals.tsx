@@ -48,6 +48,13 @@ const CarRentals = () => {
               Choose from our diverse collection of well-maintained vehicles for your perfect journey
             </p>
           </div>
+          {/* Note for variable price */}
+          <div className="p-6 bg-yellow-50 rounded-2xl border border-yellow-600/30 mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Note</h3>
+            <p className="text-gray-600 text-sm">
+              Please note that Car prices may slightly vary as per the timings like beyond 12/10 hrs and economical situations
+            </p>
+          </div>
 
           {/* Availability Statistics */}
           <div className="grid grid-cols-3 gap-4 mb-8">
