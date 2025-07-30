@@ -69,9 +69,9 @@ const Home = () => {
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-800 mb-6 leading-tight">
-                Your Journey
+                Zeet Tours and Travels
                 <span className="block bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
-                Starts Here
+                Your Travel Partner
               </span>
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
