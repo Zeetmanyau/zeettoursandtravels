@@ -150,11 +150,11 @@ export const cars: Car[] = [
     id: 'traveller',
     name: 'Force Traveller',
     type: 'Tempo traveller',
-    basePrice: 4500, // Per day (150km)
+    basePrice: 5000, // Per day (150km)
     extraKmRate: 13, // From start, not above base
     hourlyRate: 0, // Not applicable for daily rental
     baseDistance: 150,
-    baseHours: 12, // Full day
+    baseHours: 24, // Full day
     features: ['AC', 'Push Back Seats', 'Music System', 'Large Capacity'],
     seatingCapacity: 13,
     fuelType: 'Diesel',

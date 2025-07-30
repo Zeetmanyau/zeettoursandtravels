@@ -278,8 +278,7 @@ const CarDetail = () => {
                     <span className="font-medium text-yellow-800">Special Pricing</span>
                   </div>
                   <p className="text-gray-700 text-sm">
-                    12 Hour rental includes {car.baseDistance}km. For distances above {car.baseDistance}km,
-                    rate is ₹{car.extraKmRate}/km from the start of journey. <br/> For Hilly and Mountain Areas - Price is ₹ 5500 per for 150 Km (12 Hours) and ₹ 15 per Km
+                    Rate is ₹{car.extraKmRate}/km from the start of journey. <br/> For Hilly and Mountain Areas - Price is ₹ 6000 per day for 12 Hours and ₹ 15 per Km
                   </p>
                 </div>
             )}
