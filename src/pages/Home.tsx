@@ -69,7 +69,7 @@ const Home = () => {
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-800 mb-6 leading-tight">
-                Zeet Tours and Travels
+                Zeet Tours & Travels
                 <span className="block bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
                 Your Travel Partner
               </span>
