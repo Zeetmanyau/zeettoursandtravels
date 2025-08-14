@@ -52,7 +52,7 @@ const Home = () => {
         <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0">
             <img
-                src="public/images/general/homeback.jpg"
+                src="/images/general/homeback.jpg"
                 alt="Zeet Tours & Travels Background"
                 className="w-full h-full object-cover"
             />
