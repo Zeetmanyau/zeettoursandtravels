@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Star, Users, ExternalLink } from 'lucide-react';
 import { TravelPackage } from '../data/packages';

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Filter, Search, CheckCircle, XCircle } from 'lucide-react';
 import CarCard from '../components/CarCard';
-import { getActiveCars, getCarsByTypeAndAvailability } from '../data/cars';
+import { getCarsByTypeAndAvailability } from '../data/cars';
 
 const CarRentals = () => {
   const [selectedType, setSelectedType] = useState('All');
@@ -25,13 +25,6 @@ const CarRentals = () => {
     return cars;
   }, [selectedType, selectedAvailability, searchTerm]);
 
-  // Get availability statistics
-  const availabilityStats = useMemo(() => {
-    const allCars = getActiveCars();
-    const available = allCars.filter(car => car.availability === 'Available').length;
-    const unavailable = allCars.filter(car => car.availability === 'Unavailable').length;
-    return { available, unavailable, total: allCars.length };
-  }, []);
 
   return (
       <div className="min-h-screen pt-20 px-4 sm:px-6 lg:px-8">
@@ -47,29 +40,6 @@ const CarRentals = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Choose from our diverse collection of well-maintained vehicles for your perfect journey
             </p>
-          </div>
-          {/* Note for variable price */}
-          <div className="p-6 bg-yellow-50 rounded-2xl border border-yellow-600/30 mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Note</h3>
-            <p className="text-gray-600 text-sm">
-              Please note that Car prices may slightly vary as per the timings like beyond 10-12 hours and economical situations
-            </p>
-          </div>
-
-          {/* Availability Statistics */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="bg-white rounded-lg p-4 border border-yellow-600/30 text-center">
-              <div className="text-2xl font-bold text-gray-800">{availabilityStats.total}</div>
-              <div className="text-gray-600 text-sm">Total Cars</div>
-            </div>
-            <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
-              <div className="text-2xl font-bold text-green-600">{availabilityStats.available}</div>
-              <div className="text-gray-600 text-sm">Available</div>
-            </div>
-            <div className="bg-white rounded-lg p-4 border border-red-200 text-center">
-              <div className="text-2xl font-bold text-red-600">{availabilityStats.unavailable}</div>
-              <div className="text-gray-600 text-sm">Unavailable</div>
-            </div>
           </div>
 
           {/* Search and Filters */}

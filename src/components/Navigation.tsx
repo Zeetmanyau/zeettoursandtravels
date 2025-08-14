@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Car, MapPin, User, Phone, Menu, X, HelpCircle, Plane } from 'lucide-react';
 
 const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -27,11 +27,7 @@ const Navigation = () => {
   ];
 
   return (
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-              ? 'backdrop-blur-xl bg-white/95 shadow-2xl border-b border-yellow-600/20'
-              : 'bg-transparent'
-      }`}>
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/95 shadow-2xl border-b border-yellow-600/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo and Brand */}
@@ -43,21 +39,18 @@ const Navigation = () => {
                     alt="Zeet Tours & Travels Logo"
                     className="h-16 w-16 object-contain group-hover:scale-110 transition-transform duration-300"
                 />
-                {/* glow effect on hover */}
+                {/* Subtle glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-yellow-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
               </div>
 
               {/* Brand Text */}
               <div className="flex flex-col">
-              <span className="text-xl font-bold bg-gradient-to-r from-gray-700 via-yellow-600 to-gray-800 bg-clip-text text-transparent group-hover:from-gray-600 group-hover:via-yellow-500 group-hover:to-gray-700 transition-all duration-300">
-                Zeet Tours & Travels
-              </span>
-                <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300 -mt-1">
-                Your Travel Partner
+              <span className="text-xl font-bold bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 bg-clip-text text-transparent group-hover:from-yellow-500 group-hover:via-yellow-400 group-hover:to-yellow-500 transition-all duration-300 whitespace-nowrap">
+                Zeet Tours and Travels
               </span>
               </div>
 
-              {/* underline effect */}
+              {/* Subtle underline effect */}
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-600 to-yellow-500 group-hover:w-full transition-all duration-300"></div>
             </Link>
 

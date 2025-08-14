@@ -41,7 +41,7 @@ const Home = () => {
     {
       name: 'Samujjhal Bharadwaj',
       rating: 5,
-      comment: 'booked the service with rest room and Innova with Zeet Tours and Travels. The owner himself is very cooperative and he made all the arrangements as promised over phone. The driver of the vehicle Mr. Bhaskar Baruah, who drove us to Parasuram Kund and back was also very skilled and cooperative. I recommend the service to you all. Thank you Zeet Tours and Travels!',
+      comment: 'Booked the service with rest room and Innova with Zeet Tours and Travels. The owner himself is very cooperative and he made all the arrangements as promised over phone. The driver of the vehicle Mr. Bhaskar Baruah, who drove us to Parasuram Kund and back was also very skilled and cooperative. I recommend the service to you all!',
       location: 'Tinsukia - Assam'
     }
   ];
@@ -50,27 +50,20 @@ const Home = () => {
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-100/50 via-gray-100/50 to-stone-100/50"></div>
+          <div className="absolute inset-0">
+            <img
+                src="public/images/general/homeback.jpg"
+                alt="Zeet Tours & Travels Background"
+                className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/40"></div>
+          </div>
 
-          {/* Hero Logo Display */}
           <div className="relative max-w-7xl mx-auto">
-            <div className="text-center">
-              {/* Large Logo Display */}
-              <div className="mb-8 flex justify-center">
-                <div className="relative group">
-                  <img
-                      src="/logobg.png"
-                      alt="Zeet Tours & Travels"
-                      className="h-32 w-32 sm:h-40 sm:w-40 object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Elegant glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/30 to-yellow-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
-                </div>
-              </div>
-
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-800 mb-6 leading-tight">
+            <div className="text-center pt-16">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
                 Zeet Tours & Travels
-                <span className="block bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
+                <span className="block text-yellow-400 drop-shadow-2xl">
                 Your Travel Partner
               </span>
               </h1>
@@ -92,7 +85,7 @@ const Home = () => {
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-              <p className="text-xl text-gray-600 mt-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 mt-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
                 Discover amazing destinations and rent premium vehicles with Zeet Tours and Travels.
                 Your comfort and safety are our top priorities.
               </p>

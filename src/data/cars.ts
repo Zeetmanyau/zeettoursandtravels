@@ -148,19 +148,19 @@ export const cars: Car[] = [
   },
   {
     id: 'traveller',
-    name: 'Force Traveller',
+    name: 'Traveller',
     type: 'Tempo traveller',
-    basePrice: 5000, // Per day (150km)
-    extraKmRate: 13, // From start, not above base
+    basePrice: 5000, // Per day
+    extraKmRate: 13, // From start (zero km)
     hourlyRate: 0, // Not applicable for daily rental
-    baseDistance: 150,
+    baseDistance: 0, // No base distance - charged from start
     baseHours: 24, // Full day
     features: ['AC', 'Push Back Seats', 'Music System', 'Large Capacity'],
-    seatingCapacity: 13,
+    seatingCapacity: 12,
     fuelType: 'Diesel',
     transmission: 'Manual',
     imageUrl: '/images/cars/Traveller.png',
-    description: 'Large capacity vehicle perfect for group tours and outstation trips.',
+    description: 'Large capacity vehicle perfect for group tours and outstation trips. Special pricing for hilly regions available.',
     isActive: true,
     availability: 'Available'
   },

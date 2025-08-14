@@ -197,89 +197,167 @@ const CarDetail = () => {
               Pricing Details
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className={`p-6 rounded-xl border ${
-                  isAvailable
-                      ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-600/30'
-                      : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
-              }`}>
-                <div className="flex items-center space-x-3 mb-4">
-                  <MapPin className={`h-6 w-6 ${isAvailable ? 'text-yellow-600' : 'text-gray-500'}`} />
-                  <h3 className={`text-lg font-semibold ${
-                      isAvailable ? 'text-gray-800' : 'text-gray-600'
-                  }`}>
-                    Base Package
-                  </h3>
-                </div>
-                <div className={`text-3xl font-bold mb-2 ${
-                    isAvailable ? 'text-yellow-600' : 'text-gray-500'
-                }`}>
-                  ₹{car.basePrice.toLocaleString()}
-                </div>
-                <div className="text-gray-600">
-                  For {car.baseDistance}km ({car.baseHours} hours)
-                </div>
-              </div>
+            {car.type === 'Tempo traveller' ? (
+                // Special pricing layout for Tempo Traveller
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className={`p-6 rounded-xl border ${
+                        isAvailable
+                            ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-600/30'
+                            : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                    }`}>
+                      <div className="flex items-center space-x-3 mb-4">
+                        <Calendar className={`h-6 w-6 ${isAvailable ? 'text-yellow-600' : 'text-gray-500'}`} />
+                        <h3 className={`text-lg font-semibold ${
+                            isAvailable ? 'text-gray-800' : 'text-gray-600'
+                        }`}>
+                          Daily Rate
+                        </h3>
+                      </div>
+                      <div className={`text-3xl font-bold mb-2 ${
+                          isAvailable ? 'text-yellow-600' : 'text-gray-500'
+                      }`}>
+                        ₹{car.basePrice.toLocaleString()}/day
+                      </div>
+                      <div className="text-gray-600">
+                        24 hours rental
+                      </div>
+                    </div>
 
-              <div className={`p-6 rounded-xl border ${
-                  isAvailable
-                      ? 'bg-gradient-to-br from-stone-50 to-stone-100 border-stone-200'
-                      : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
-              }`}>
-                <div className="flex items-center space-x-3 mb-4">
-                  <MapPin className={`h-6 w-6 ${isAvailable ? 'text-stone-600' : 'text-gray-500'}`} />
-                  <h3 className={`text-lg font-semibold ${
-                      isAvailable ? 'text-gray-800' : 'text-gray-600'
-                  }`}>
-                    Extra Distance
-                  </h3>
-                </div>
-                <div className={`text-3xl font-bold mb-2 ${
-                    isAvailable ? 'text-stone-600' : 'text-gray-500'
-                }`}>
-                  ₹{car.extraKmRate}/km
-                </div>
-                <div className="text-gray-600">
-                  Above {car.baseDistance}km
-                </div>
-              </div>
+                    <div className={`p-6 rounded-xl border ${
+                        isAvailable
+                            ? 'bg-gradient-to-br from-stone-50 to-stone-100 border-stone-200'
+                            : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                    }`}>
+                      <div className="flex items-center space-x-3 mb-4">
+                        <MapPin className={`h-6 w-6 ${isAvailable ? 'text-stone-600' : 'text-gray-500'}`} />
+                        <h3 className={`text-lg font-semibold ${
+                            isAvailable ? 'text-gray-800' : 'text-gray-600'
+                        }`}>
+                          Per Kilometer
+                        </h3>
+                      </div>
+                      <div className={`text-3xl font-bold mb-2 ${
+                          isAvailable ? 'text-stone-600' : 'text-gray-500'
+                      }`}>
+                        ₹{car.extraKmRate}/km
+                      </div>
+                      <div className="text-gray-600">
+                        From start of trip (0 km)
+                      </div>
+                    </div>
+                  </div>
 
-              {car.hourlyRate > 0 && (
+                  {/* Hilly Region Pricing */}
+                  <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6">
+                    <h3 className="text-lg font-semibold text-orange-800 mb-4 flex items-center">
+                      <MapPin className="h-5 w-5 mr-2" />
+                      Hilly Region Pricing
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-orange-600">₹6,000/day</div>
+                        <div className="text-orange-700 text-sm">Daily rate for hilly areas</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-orange-600">₹15/km</div>
+                        <div className="text-orange-700 text-sm">Per km rate for hilly areas</div>
+                      </div>
+                    </div>
+                    <p className="text-orange-700 text-sm mt-3">
+                      *Hilly regions include areas like Tawang, Bomdila, and other mountainous destinations
+                    </p>
+                  </div>
+                </div>
+            ) : (
+                // Standard pricing layout for other vehicles
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className={`p-6 rounded-xl border ${
                       isAvailable
-                          ? 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                          ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-600/30'
                           : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
                   }`}>
                     <div className="flex items-center space-x-3 mb-4">
-                      <Clock className={`h-6 w-6 ${isAvailable ? 'text-gray-600' : 'text-gray-500'}`} />
+                      <MapPin className={`h-6 w-6 ${isAvailable ? 'text-yellow-600' : 'text-gray-500'}`} />
                       <h3 className={`text-lg font-semibold ${
                           isAvailable ? 'text-gray-800' : 'text-gray-600'
                       }`}>
-                        Extra Hours
+                        Base Package
                       </h3>
                     </div>
                     <div className={`text-3xl font-bold mb-2 ${
-                        isAvailable ? 'text-gray-600' : 'text-gray-500'
+                        isAvailable ? 'text-yellow-600' : 'text-gray-500'
                     }`}>
-                      ₹{car.hourlyRate}/hr
+                      ₹{car.basePrice.toLocaleString()}
                     </div>
                     <div className="text-gray-600">
-                      Beyond {car.baseHours} hours
+                      For {car.baseDistance}km ({car.baseHours} hours)
                     </div>
                   </div>
-              )}
-            </div>
 
-            {/* Special Note for Tempo Traveller */}
-            {car.type === 'Tempo traveller' && (
-                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-600/30 rounded-lg">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Calendar className="h-5 w-5 text-yellow-600" />
-                    <span className="font-medium text-yellow-800">Special Pricing</span>
+                  <div className={`p-6 rounded-xl border ${
+                      isAvailable
+                          ? 'bg-gradient-to-br from-stone-50 to-stone-100 border-stone-200'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                  }`}>
+                    <div className="flex items-center space-x-3 mb-4">
+                      <MapPin className={`h-6 w-6 ${isAvailable ? 'text-stone-600' : 'text-gray-500'}`} />
+                      <h3 className={`text-lg font-semibold ${
+                          isAvailable ? 'text-gray-800' : 'text-gray-600'
+                      }`}>
+                        Extra Distance
+                      </h3>
+                    </div>
+                    <div className={`text-3xl font-bold mb-2 ${
+                        isAvailable ? 'text-stone-600' : 'text-gray-500'
+                    }`}>
+                      ₹{car.extraKmRate}/km
+                    </div>
+                    <div className="text-gray-600">
+                      Above {car.baseDistance}km
+                    </div>
                   </div>
-                  <p className="text-gray-700 text-sm">
-                    Rate is ₹{car.extraKmRate}/km from the start of journey. <br/> For Hilly and Mountain Areas - Price is ₹ 6000 per day for 12 Hours and ₹ 15 per Km
-                  </p>
+
+                  {car.hourlyRate > 0 && (
+                      <div className={`p-6 rounded-xl border ${
+                          isAvailable
+                              ? 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                              : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                      }`}>
+                        <div className="flex items-center space-x-3 mb-4">
+                          <Clock className={`h-6 w-6 ${isAvailable ? 'text-gray-600' : 'text-gray-500'}`} />
+                          <h3 className={`text-lg font-semibold ${
+                              isAvailable ? 'text-gray-800' : 'text-gray-600'
+                          }`}>
+                            Extra Hours
+                          </h3>
+                        </div>
+                        <div className={`text-3xl font-bold mb-2 ${
+                            isAvailable ? 'text-gray-600' : 'text-gray-500'
+                        }`}>
+                          ₹{car.hourlyRate}/hr
+                        </div>
+                        <div className="text-gray-600">
+                          Beyond {car.baseHours} hours
+                        </div>
+                      </div>
+                  )}
+                </div>
+            )}
+
+            {/* Special Notes */}
+            {car.type === 'Tempo traveller' && (
+                <div className="mt-6 space-y-4">
+                  <div className="p-4 bg-yellow-50 border border-yellow-600/30 rounded-lg">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Calendar className="h-5 w-5 text-yellow-600" />
+                      <span className="font-medium text-yellow-800">Pricing Options</span>
+                    </div>
+                    <p className="text-gray-700 text-sm">
+                      Choose between daily rate (₹{car.basePrice}/day) or per kilometer rate (₹{car.extraKmRate}/km from start).
+                      We'll calculate the most economical option for your trip.
+                    </p>
+                  </div>
                 </div>
             )}
           </div>
