@@ -197,7 +197,7 @@ const CarDetail = () => {
               Pricing Details
             </h2>
 
-            {car.type === 'Tempo traveller' ? (
+            {car.pricingModel === 'daily' ? (
                 // Special pricing layout for Tempo Traveller
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -220,7 +220,7 @@ const CarDetail = () => {
                         ₹{car.basePrice.toLocaleString()}/day
                       </div>
                       <div className="text-gray-600">
-                        24 hours rental
+                        {car.baseHours} hours rental
                       </div>
                     </div>
 
@@ -248,29 +248,57 @@ const CarDetail = () => {
                     </div>
                   </div>
 
+                  {/* Extra Hours Rate (if applicable) */}
+                  {car.hourlyRate > 0 && (
+                      <div className={`p-6 rounded-xl border ${
+                          isAvailable
+                              ? 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                              : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
+                      }`}>
+                        <div className="flex items-center space-x-3 mb-4">
+                          <Clock className={`h-6 w-6 ${isAvailable ? 'text-gray-600' : 'text-gray-500'}`} />
+                          <h3 className={`text-lg font-semibold ${
+                              isAvailable ? 'text-gray-800' : 'text-gray-600'
+                          }`}>
+                            Extra Hours
+                          </h3>
+                        </div>
+                        <div className={`text-3xl font-bold mb-2 ${
+                            isAvailable ? 'text-gray-600' : 'text-gray-500'
+                        }`}>
+                          ₹{car.hourlyRate}/hr
+                        </div>
+                        <div className="text-gray-600">
+                          Beyond {car.baseHours} hours
+                        </div>
+                      </div>
+                  )}
+
                   {/* Hilly Region Pricing */}
-                  <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold text-orange-800 mb-4 flex items-center">
-                      <MapPin className="h-5 w-5 mr-2" />
-                      Hilly Region Pricing
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-600">₹6,000/day</div>
-                        <div className="text-orange-700 text-sm">Daily rate for hilly areas</div>
+                  {car.hillyRegionPricing && (
+                      <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6">
+                        <h3 className="text-lg font-semibold text-orange-800 mb-4 flex items-center">
+                          <MapPin className="h-5 w-5 mr-2" />
+                          Hilly Region Pricing
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-orange-600">₹{car.hillyRegionPricing.dailyRate.toLocaleString()}/day</div>
+                            <div className="text-orange-700 text-sm">Daily rate for hilly areas</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-orange-600">₹{car.hillyRegionPricing.perKmRate}/km</div>
+                            <div className="text-orange-700 text-sm">Per km rate for hilly areas</div>
+                          </div>
+                        </div>
+                        <p className="text-orange-700 text-sm mt-3">
+                          *Hilly regions include areas like Tawang, Bomdila, and other mountainous destinations
+                        </p>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-600">₹15/km</div>
-                        <div className="text-orange-700 text-sm">Per km rate for hilly areas</div>
-                      </div>
-                    </div>
-                    <p className="text-orange-700 text-sm mt-3">
-                      *Hilly regions include areas like Tawang, Bomdila, and other mountainous destinations
-                    </p>
-                  </div>
+                  )}
                 </div>
             ) : (
-                // Standard pricing layout for other vehicles
+                // Standard pricing layout for Package Pricing Model
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className={`p-6 rounded-xl border ${
                       isAvailable
@@ -346,7 +374,7 @@ const CarDetail = () => {
             )}
 
             {/* Special Notes */}
-            {car.type === 'Tempo traveller' && (
+            {car.pricingModel === 'daily' && (
                 <div className="mt-6 space-y-4">
                   <div className="p-4 bg-yellow-50 border border-yellow-600/30 rounded-lg">
                     <div className="flex items-center space-x-2 mb-2">

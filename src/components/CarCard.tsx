@@ -112,10 +112,14 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
             <div className={`text-sm ${
                 isAvailable ? 'text-gray-800' : 'text-gray-600'
             }`}>
-              {car.type === 'Tempo traveller' ? (
+              {car.pricingModel === 'daily' ? (
                   <>
                     <div>₹{car.basePrice}/day or ₹{car.extraKmRate}/km</div>
-                    <div className="text-xs text-yellow-600">Hilly: ₹6000/day or ₹15/km</div>
+                    {car.hillyRegionPricing && (
+                        <div className="text-xs text-yellow-600">
+                          Hilly: ₹{car.hillyRegionPricing.dailyRate}/day or ₹{car.hillyRegionPricing.perKmRate}/km
+                        </div>
+                    )}
                   </>
               ) : (
                   <>

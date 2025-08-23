@@ -3,11 +3,28 @@ export interface Car {
   id: string;
   name: string;
   type: 'Sedan' | 'SUV' | 'Hatchback' | 'MPV' | 'Tempo traveller';
-  basePrice: number; // Price for base package (100km or daily)
-  extraKmRate: number; // Rate per km above base
-  hourlyRate: number; // Rate per hour beyond base hours
-  baseDistance: number; // Base distance included (in km)
-  baseHours: number; // Base hours included
+
+  // Pricing Model Configuration
+  pricingModel: 'package' | 'daily'; // 'package' for traditional, 'daily' for per-day pricing
+
+  // Traditional Package Pricing (for pricingModel: 'package')
+  basePrice: number; // Price for base package (e.g., 100km + 10hrs) OR daily rate
+  baseDistance: number; // Base distance included (in km) - 0 for daily model
+  baseHours: number; // Base hours included - for daily model, this is total hours per day
+
+  // Additional Rates (applicable to both models)
+  extraKmRate: number; // Rate per km (above base for package model, from 0km for daily model)
+  hourlyRate: number; // Rate per hour beyond base hours (0 if not applicable)
+
+  // Optional: Daily rate (for cars that support both models)
+  dailyRate?: number; // Alternative daily rate option
+
+  // Hilly Region Pricing (optional)
+  hillyRegionPricing?: {
+    dailyRate: number;
+    perKmRate: number;
+  };
+
   features: string[];
   seatingCapacity: number;
   fuelType: 'Petrol' | 'Diesel' | 'CNG';
@@ -19,11 +36,12 @@ export interface Car {
 }
 
 export const cars: Car[] = [
-  // ACTIVE CARS
+  // ACTIVE CARS (8 visible cars)
   {
     id: 'suzuki-dezire',
     name: 'Suzuki Dezire',
     type: 'Sedan',
+    pricingModel: 'package',
     basePrice: 2200,
     extraKmRate: 11,
     hourlyRate: 120,
@@ -42,6 +60,7 @@ export const cars: Car[] = [
     id: 'suzuki-breeza',
     name: 'Suzuki Breeza',
     type: 'SUV',
+    pricingModel: 'package',
     basePrice: 2600,
     extraKmRate: 12,
     hourlyRate: 150,
@@ -60,6 +79,7 @@ export const cars: Car[] = [
     id: 'alto-k10',
     name: 'Suzuki Alto K10',
     type: 'Hatchback',
+    pricingModel: 'package',
     basePrice: 1700,
     extraKmRate: 10,
     hourlyRate: 100,
@@ -78,6 +98,7 @@ export const cars: Car[] = [
     id: 'wagonr',
     name: 'Suzuki WagonR',
     type: 'Hatchback',
+    pricingModel: 'package',
     basePrice: 1900,
     extraKmRate: 11,
     hourlyRate: 110,
@@ -96,6 +117,7 @@ export const cars: Car[] = [
     id: 'ertiga',
     name: 'Suzuki Ertiga',
     type: 'MPV',
+    pricingModel: 'package',
     basePrice: 3200,
     extraKmRate: 12,
     hourlyRate: 150,
@@ -114,6 +136,7 @@ export const cars: Car[] = [
     id: 'innova-crysta',
     name: 'Toyota Innova Crysta',
     type: 'MPV',
+    pricingModel: 'package',
     basePrice: 3500,
     extraKmRate: 13,
     hourlyRate: 200,
@@ -132,6 +155,7 @@ export const cars: Car[] = [
     id: 'innova-old',
     name: 'Toyota Innova (Old Gen)',
     type: 'MPV',
+    pricingModel: 'package',
     basePrice: 3000,
     extraKmRate: 13,
     hourlyRate: 180,
@@ -150,11 +174,16 @@ export const cars: Car[] = [
     id: 'traveller',
     name: 'Traveller',
     type: 'Tempo traveller',
-    basePrice: 5000, // Per day
-    extraKmRate: 13, // From start (zero km)
+    pricingModel: 'daily',
+    basePrice: 5000, // Daily rate
+    extraKmRate: 13, // Per km from start (0km)
     hourlyRate: 0, // Not applicable for daily rental
-    baseDistance: 0, // No base distance - charged from start
-    baseHours: 24, // Full day
+    baseDistance: 0, // No base distance included
+    baseHours: 24, // Full day (24 hours)
+    hillyRegionPricing: {
+      dailyRate: 6000,
+      perKmRate: 15
+    },
     features: ['AC', 'Push Back Seats', 'Music System', 'Large Capacity'],
     seatingCapacity: 12,
     fuelType: 'Diesel',
@@ -164,154 +193,46 @@ export const cars: Car[] = [
     isActive: true,
     availability: 'Available'
   },
-
-  // FUTURE CAR SLOTS (7 commented cars for future addition)
-  /* Future Car Slot #1 - Sedan Category
   {
-    id: 'honda-amaze',
-    name: 'Honda Amaze',
-    type: 'Sedan',
-    basePrice: 2400,
-    extraKmRate: 12,
-    hourlyRate: 130,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Power Steering', 'Touchscreen', 'Safety Features'],
-    seatingCapacity: 5,
-    fuelType: 'Petrol',
-    transmission: 'Automatic',
-    imageUrl: '/images/cars/honda-amaze.jpg',
-    description: 'Premium sedan with automatic transmission and advanced features.',
-    isActive: false,
-    availability: 'Available'
-  },
-  */
-
-  /* Future Car Slot #2 - SUV Category
-  {
-    id: 'tata-nexon',
-    name: 'Tata Nexon',
+    id: 'Fortuner',
+    name: 'Toyota Fortuner',
     type: 'SUV',
-    basePrice: 3100,
-    extraKmRate: 13,
-    hourlyRate: 160,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Touchscreen', '5-Star Safety', 'Premium Interior'],
-    seatingCapacity: 5,
-    fuelType: 'Petrol',
-    transmission: 'Manual',
-    imageUrl: '/images/cars/tata-nexon.jpg',
-    description: '5-star safety rated compact SUV with modern features.',
-    isActive: false,
-    availability: 'Available'
-  },
-  */
-
-  /* Future Car Slot #3 - Hatchback Category
-  {
-    id: 'hyundai-i20',
-    name: 'Hyundai i20',
-    type: 'Hatchback',
-    basePrice: 2100,
-    extraKmRate: 11,
-    hourlyRate: 115,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Touchscreen', 'Premium Features', 'Stylish Design'],
-    seatingCapacity: 5,
-    fuelType: 'Petrol',
-    transmission: 'Manual',
-    imageUrl: '/images/cars/hyundai-i20.jpg',
-    description: 'Premium hatchback with modern styling and advanced features.',
-    isActive: false,
-    availability: 'Unavailable'
-  },
-  */
-
-  /* Future Car Slot #4 - MPV Category
-  {
-    id: 'mahindra-bolero',
-    name: 'Mahindra Bolero',
-    type: 'MPV',
-    basePrice: 2800,
-    extraKmRate: 12,
-    hourlyRate: 140,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Rugged Build', 'High Ground Clearance', '8 Seater'],
-    seatingCapacity: 8,
+    pricingModel: 'daily',
+    basePrice: 8000, // Daily rate
+    extraKmRate: 13, // Per km from start (0km)
+    hourlyRate: 500, // Rate per hour beyond 10 hours
+    baseDistance: 0, // No base distance included
+    baseHours: 10, // Base hours per day
+    features: ['AC', 'Power Steering', 'GPS', 'Premium Interior'],
+    seatingCapacity: 7,
     fuelType: 'Diesel',
     transmission: 'Manual',
-    imageUrl: '/images/cars/mahindra-bolero.jpg',
-    description: 'Rugged and reliable MPV perfect for rough terrain travel.',
-    isActive: false,
+    imageUrl: '/images/cars/fortuner.png',
+    description: 'Experience power and luxury on every drive — the perfect blend of rugged performance and premium comfort.',
+    isActive: true,
     availability: 'Available'
   },
-  */
-
-  /* Future Car Slot #5 - Luxury Sedan
   {
-    id: 'honda-city',
-    name: 'Honda City',
+    id: 'slavia',
+    name: 'Skoda slavia',
     type: 'Sedan',
-    basePrice: 2600,
-    extraKmRate: 13,
-    hourlyRate: 140,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Sunroof', 'Leather Seats', 'Premium Audio'],
-    seatingCapacity: 5,
+    pricingModel: 'daily',
+    basePrice: 4000, // Daily rate
+    extraKmRate: 9, // Per km from start (0km)
+    hourlyRate: 500, // Rate per hour beyond 10 hours
+    baseDistance: 0, // No base distance included
+    baseHours: 10, // Base hours per day
+    features: ['AC', 'Power Steering', 'GPS', 'Premium Interior'],
+    seatingCapacity: 7,
     fuelType: 'Petrol',
-    transmission: 'Automatic',
-    imageUrl: '/images/cars/honda-city.jpg',
-    description: 'Luxury sedan with premium features and automatic transmission.',
-    isActive: false,
-    availability: 'Available'
-  },
-  */
-
-  /* Future Car Slot #6 - Premium SUV
-  {
-    id: 'hyundai-creta',
-    name: 'Hyundai Creta',
-    type: 'SUV',
-    basePrice: 3300,
-    extraKmRate: 14,
-    hourlyRate: 170,
-    baseDistance: 100,
-    baseHours: 10,
-    features: ['AC', 'Panoramic Sunroof', 'Premium Interior', 'Advanced Safety'],
-    seatingCapacity: 5,
-    fuelType: 'Petrol',
-    transmission: 'Automatic',
-    imageUrl: '/images/cars/hyundai-creta.jpg',
-    description: 'Premium compact SUV with luxury features and automatic transmission.',
-    isActive: false,
-    availability: 'Unavailable'
-  },
-  */
-
-  /* Future Car Slot #7 - Large Tempo Traveller
-  {
-    id: 'tempo-traveller-17',
-    name: 'Tempo Traveller 17 Seater',
-    type: 'Tempo traveller',
-    basePrice: 5500,
-    extraKmRate: 15,
-    hourlyRate: 0,
-    baseDistance: 150,
-    baseHours: 24,
-    features: ['AC', 'Push Back Seats', 'Music System', 'Extra Large Capacity'],
-    seatingCapacity: 17,
-    fuelType: 'Diesel',
     transmission: 'Manual',
-    imageUrl: '/images/cars/tempo-traveller-17.jpg',
-    description: 'Large capacity tempo traveller for big group tours and events.',
-    isActive: false,
+    imageUrl: '/images/cars/slavia.png',
+    description: 'Drive in style and comfort — a sleek sedan that combines elegance, space, and modern performance.',
+    isActive: true,
     availability: 'Available'
   },
-  */
+
+
 ];
 
 // Filter function to get only active cars
@@ -353,6 +274,6 @@ export const getCarsByTypeAndAvailability = (type: string, availability: string)
 
 // Google Form URLs - Update these with your actual Google Form links
 export const BOOKING_FORMS = {
-  CAR_RENTAL: 'https://docs.google.com/forms/d/e/1FAIpQLSfLJbDUPXLNMByWzeEJoHtiwPpCRzaEItOz_iWlcNlcr9J9ng/viewform?usp=sharing&ouid=101642107306155374619', // Replace with actual Google Form URL
-  TRAVEL_PACKAGE: 'https://docs.google.com/forms/d/e/1FAIpQLScZcr2rQ4RvdXtKYHjZQtetSY5cosXXzvFq7qKBml00KpINwA/viewform?usp=sharing&ouid=101642107306155374619' // Replace with actual Google Form URL
+  CAR_RENTAL: 'https://forms.google.com/car-rental-booking', // Replace with actual Google Form URL
+  TRAVEL_PACKAGE: 'https://forms.google.com/travel-package-booking' // Replace with actual Google Form URL
 };
