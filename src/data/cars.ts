@@ -2,7 +2,7 @@
 export interface Car {
   id: string;
   name: string;
-  type: 'Sedan' | 'SUV' | 'Hatchback' | 'MPV' | 'Tempo traveller';
+  type: 'Sedan' | 'SUV' | 'Hatchback' | 'MPV' | 'Tempo traveller' | 'Bus';
 
   // Pricing Model Configuration
   pricingModel: 'package' | 'daily'; // 'package' for traditional, 'daily' for per-day pricing
@@ -228,6 +228,25 @@ export const cars: Car[] = [
     transmission: 'Manual',
     imageUrl: '/images/cars/slavia.png',
     description: 'Drive in style and comfort — a sleek sedan that combines elegance, space, and modern performance.',
+    isActive: true,
+    availability: 'Available'
+  },
+  {
+    id: 'starbus',
+    name: 'Tata Starbus Ultra',
+    type: 'Bus',
+    pricingModel: 'daily',
+    basePrice: 8000, // Daily rate
+    extraKmRate: 20, // Per km from start (0km)
+    hourlyRate: 500, // Rate per hour beyond 10 hours
+    baseDistance: 0, // No base distance included
+    baseHours: 10, // Base hours per day
+    features: ['Comfortable Ride', 'lower NVH (Noise, Vibration, Harshness)', 'Reclining Seats', 'Ample Legroom'],
+    seatingCapacity: 50,
+    fuelType: 'Diesel',
+    transmission: 'Manual',
+    imageUrl: '/images/cars/starbus.png',
+    description: 'Planning a trip with family, friends, or a tour group? Our Tata Starbus is the perfect choice for hassle-free travel. With spacious seating, wide windows for scenic views, and smooth rides even on long journeys, it’s designed to keep your group comfortable throughout the trip. The bus is well-maintained, reliable, and operated by experienced drivers to ensure a safe and enjoyable travel experience. Ideal for city tours, outstation trips, picnics, and holidays.',
     isActive: true,
     availability: 'Available'
   },

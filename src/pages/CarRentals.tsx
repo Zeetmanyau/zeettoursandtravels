@@ -9,7 +9,7 @@ const CarRentals = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
 
-  const carTypes = ['All', 'Sedan', 'SUV', 'Hatchback', 'MPV', 'Tempo traveller'];
+  const carTypes = ['All', 'Sedan', 'SUV', 'Hatchback', 'MPV', 'Tempo traveller', 'Bus'];
   const availabilityOptions = ['All', 'Available', 'Unavailable'];
 
   const filteredCars = useMemo(() => {

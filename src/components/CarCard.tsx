@@ -114,10 +114,10 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
             }`}>
               {car.pricingModel === 'daily' ? (
                   <>
-                    <div>₹{car.basePrice}/day or ₹{car.extraKmRate}/km</div>
+                    <div>₹{car.basePrice}/day + ₹{car.extraKmRate}/km (fuel)</div>
                     {car.hillyRegionPricing && (
                         <div className="text-xs text-yellow-600">
-                          Hilly: ₹{car.hillyRegionPricing.dailyRate}/day or ₹{car.hillyRegionPricing.perKmRate}/km
+                          Hilly: ₹{car.hillyRegionPricing.dailyRate}/day + ₹{car.hillyRegionPricing.perKmRate}/km (fuel)
                         </div>
                     )}
                   </>

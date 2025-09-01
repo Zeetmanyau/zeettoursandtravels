@@ -342,7 +342,7 @@ const CarDetail = () => {
                       ₹{car.extraKmRate}/km
                     </div>
                     <div className="text-gray-600">
-                      Above {car.baseDistance}km
+                      Fuel charges from start (0 km)
                     </div>
                   </div>
 
@@ -379,11 +379,11 @@ const CarDetail = () => {
                   <div className="p-4 bg-yellow-50 border border-yellow-600/30 rounded-lg">
                     <div className="flex items-center space-x-2 mb-2">
                       <Calendar className="h-5 w-5 text-yellow-600" />
-                      <span className="font-medium text-yellow-800">Pricing Options</span>
+                      <span className="font-medium text-yellow-800">Daily Pricing Structure</span>
                     </div>
                     <p className="text-gray-700 text-sm">
-                      Choose between daily rate (₹{car.basePrice}/day) or per kilometer rate (₹{car.extraKmRate}/km from start).
-                      We'll calculate the most economical option for your trip.
+                      Daily rate (₹{car.basePrice}/day) plus fuel charges (₹{car.extraKmRate}/km from start of trip).
+                      Both charges apply for the complete pricing.
                     </p>
                   </div>
                 </div>
